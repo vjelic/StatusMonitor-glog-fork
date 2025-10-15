@@ -12,6 +12,18 @@
           "informationUri": "https://www.glog.ai",
           "rules": [
             {
+              "id": "6caefda1-77d3-3b05-80e6-cfb6c6f53c18",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nIn C++ programming, the use of non-cryptographic or weak random number generators can lead to vulnerabilities. The `rand()` function, for example, is a weak random number generator because it is predictable and can be easily reproduced. This can lead to security issues, especially when used in security-sensitive contexts such as generating passwords, cryptographic keys, or any other security parameters.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use a strong, cryptographic random number generator. In C++, this can be achieved by using functions provided by libraries such as `<random>` or `<cryptopp>`.\n\n## Source Code Fix Recommendation\n\nInstead of using `rand()`, you can use `std::random_device` from the `<random>` library to generate a truly random number. Here is an example:\n\n```cpp\n#include <random>\n\nint main() {\n    std::random_device rd;\n    int random_number = rd();\n    // Use random_number\n    return 0;\n}\n```\n\nIn this code, `std::random_device` is a uniformly-distributed integer random number generator that produces non-deterministic random numbers.\n\n## Library Dependencies\n\nThe above code requires the `<random>` library.\n\n## References\n\n- [CWE-338: Use of Cryptographically Weak PRNG](https://cwe.mitre.org/data/definitions/338.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS148264"
+                ]
+              }
+            },
+            {
               "id": "a37b6771-6293-3880-9999-ce1db2d7a9c0",
               "help": {
                 "text": "",
@@ -20,32 +32,6 @@
               "properties": {
                 "tags": [
                   "DS140021"
-                ]
-              }
-            },
-            {
-              "id": "2337f332-7c68-3c2d-8449-32a6f8caa524",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nIn C++ programming, the vulnerability \"Avoid Using Non-Cryptographic or Weak Random Number Generators\" refers to the use of weak or non-cryptographic random number generators that can lead to predictable or easily guessable random numbers. This can be exploited by attackers to predict the outcome of the program's operations that rely on these random numbers, leading to potential security breaches.\n\nThe `RAND_MAX` is a constant defined in the C++ standard library. It represents the maximum value that can be returned by the `rand()` function. The `rand()` function is a weak random number generator and should not be used for generating random numbers in a security context.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, use a strong cryptographic random number generator instead of weak or non-cryptographic ones. In C++, you can use functions provided by libraries like `<random>` which provides a variety of random number generators that are more secure and less predictable than `rand()`.\n\n## Source Code Fix Recommendation\n\nInstead of using `rand()`, use `std::random_device` and `std::mt19937` from the `<random>` library. Here is an example:\n\n```cpp\n#include <random>\n\nstd::random_device rd;  // Will be used to obtain a seed for the random number engine\nstd::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()\nstd::uniform_int_distribution<> distrib(1, 6);\n\nint random_number = distrib(gen);\n```\n\n## Library Dependencies\n\nThe above code example requires the `<random>` library.\n\n## References\n\n- [CWE-338: Use of Cryptographically Weak PRNG](https://cwe.mitre.org/data/definitions/338.html)"
-              },
-              "properties": {
-                "tags": [
-                  "DS148264",
-                  "2337f332-7c68-3c2d-8449-32a6f8caa524"
-                ]
-              }
-            },
-            {
-              "id": "6caefda1-77d3-3b05-80e6-cfb6c6f53c18",
-              "help": {
-                "text": "",
-                "markdown": "## Description\n\nIn C++ programming, the use of non-cryptographic or weak random number generators can lead to vulnerabilities. The `rand()` function, for example, is a weak random number generator because it is predictable and can be easily reproduced. This can lead to security issues, especially when used in security-sensitive contexts such as generating passwords, cryptographic keys, or any other security parameters.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use a strong, cryptographic random number generator. In C++, this can be achieved by using functions provided by libraries such as `<random>` or `<cryptopp>`.\n\n## Source Code Fix Recommendation\n\nInstead of using `rand()`, you can use `std::random_device` from the `<random>` library to generate a truly random number. Here is an example:\n\n```cpp\n#include <random>\n\nint main() {\n    std::random_device rd;\n    int random_number = rd();\n    // Use random_number\n    return 0;\n}\n```\n\nIn this code, `std::random_device` is a uniformly-distributed integer random number generator that produces non-deterministic random numbers.\n\n## Library Dependencies\n\nThe above code requires the `<random>` library.\n\n## References\n\n- [CWE-338: Use of Cryptographically Weak PRNG](https://cwe.mitre.org/data/definitions/338.html)"
-              },
-              "properties": {
-                "tags": [
-                  "DS148264",
-                  "6caefda1-77d3-3b05-80e6-cfb6c6f53c18"
                 ]
               }
             }
@@ -60,6 +46,46 @@
       },
       "language": "en-US",
       "results": [
+        {
+          "ruleId": "2337f332-7c68-3c2d-8449-32a6f8caa524",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Avoid Using Non-Cryptographic or Weak Random Number Generators"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/HealthTest.cpp"
+                },
+                "region": {
+                  "startLine": 160,
+                  "startColumn": 25,
+                  "endLine": 160,
+                  "endColumn": 33,
+                  "charOffset": 8862,
+                  "charLength": 8,
+                  "snippet": {
+                    "text": "RAND_MAX",
+                    "rendered": {
+                      "text": "RAND_MAX",
+                      "markdown": "`RAND_MAX`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "Cryptography.PRNG.Weak"
+            ]
+          }
+        },
         {
           "ruleId": "a37b6771-6293-3880-9999-ce1db2d7a9c0",
           "kind": "fail",
