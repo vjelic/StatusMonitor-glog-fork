@@ -47,7 +47,7 @@
       "language": "en-US",
       "results": [
         {
-          "ruleId": "2337f332-7c68-3c2d-8449-32a6f8caa524",
+          "ruleId": "6caefda1-77d3-3b05-80e6-cfb6c6f53c18",
           "kind": "fail",
           "level": "error",
           "message": {
@@ -61,16 +61,16 @@
                 },
                 "region": {
                   "startLine": 160,
-                  "startColumn": 25,
+                  "startColumn": 18,
                   "endLine": 160,
-                  "endColumn": 33,
-                  "charOffset": 8862,
-                  "charLength": 8,
+                  "endColumn": 23,
+                  "charOffset": 8855,
+                  "charLength": 5,
                   "snippet": {
-                    "text": "RAND_MAX",
+                    "text": "rand(",
                     "rendered": {
-                      "text": "RAND_MAX",
-                      "markdown": "`RAND_MAX`"
+                      "text": "rand(",
+                      "markdown": "`rand(`"
                     }
                   },
                   "sourceLanguage": "cpp"
